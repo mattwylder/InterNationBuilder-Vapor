@@ -9,7 +9,12 @@ public func configure(_ app: Application) throws {
 
     app.databases.use(.sqlite(.file("db.sqlite")), as: .sqlite)
 
-    app.migrations.add(CreateTodo())
+    app.migrations.add(CreateContact())
+    app.migrations.add(CreateAddresses())
+    app.migrations.add(CreateAddressContactPivot())
+    app.migrations.add(CreatePaperSales())
+    
+    try app.autoMigrate().wait()
 
     // register routes
     try routes(app)
